@@ -1,0 +1,151 @@
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Rumah Sakit Mbah'mu</title>
+        <meta name="description" content="Free Bootstrap Theme by BootstrapMade.com">
+        <meta name="keywords" content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway|Candal">
+        <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <!-- =======================================================
+          Theme Name: Medilab
+          Theme URL: https://bootstrapmade.com/medilab-free-medical-bootstrap-theme/
+          Author: BootstrapMade.com
+          Author URL: https://bootstrapmade.com
+        ======================================================= -->
+    </head>
+
+    <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+        <!--banner-->
+        <section id="banner" class="banner">
+            <div class="bg-color">
+                <nav class="navbar navbar-default navbar-fixed-top">
+                    <div class="container">
+                        <div class="col-md-12">
+                            <div class="collapse navbar-collapse navbar-right" id="myNavbar">
+                                <ul class="nav navbar-nav">
+                                    <li class="active"><a href="#banner">Home</a></li>
+                                    <li class="dx"><a href="#service">Services</a></li>
+                                    <li class=""><a href="#about">About</a></li>
+                                    <li class=""><a href="#testimonial">Testimonial</a></li>
+                                    <li class=""><a href="#contact">Contact</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+                <div class="container">
+                    <div class="row">
+                        <div class="banner-info">
+                            <div class="banner-text text-center">
+                                <h1 class="white">Rumah Sakit Alternatif Terbaik</h1>
+                                <p>Mampu mengobati segala macam penyakit bahkan sakit hari</p>
+                            </div>
+                            <div class="overlay-detail text-center">
+                                <a href="#service"><i class="fa fa-angle-down"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="register" class="">                  
+            <h2>Pendaftaran Lokasi Klinik Baru</h2>
+            <p >Silakan Data Klinik Dibawah</p>
+            <h3 style="text-align: center;"><b><u>Data Lokasi Klinik</u></b></h3>
+            <form action="" id="registerForm" onsubmit="return make_json(this);" method="POST">
+                <div class="container"><br><br>
+                    <div class ="form-group">
+                        <label for="noRm">Latitude</label><br>
+                        <input type="text" placeholder="Masukkan Latitude" id="lat" required/>
+                    </div><br><!--<br>-->                        
+                    <div class ="form-group">
+                        <label for="nama">Longitude</label><br>
+                        <input type="text" placeholder="Masukkan Longitude" id="lng" required/>
+                    </div><br>
+                    <div class ="form-group">
+                        <label for="alamat">Nama Klinik</label><br>
+                        <input type="text" placeholder="Enter Nama" id="nama" required/>
+                    </div><br>
+                    <div class="clearfix">
+                        <button id="save" type="submit" class="signup">Simpan</button>
+                    </div><br><br>
+                </div>
+                <p id="output"></p>
+            </form>
+        </section>
+        <footer id="footer">
+            <div class="top-footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4 marb20">
+                            <div class="ftr-tle">
+                                <h4 class="white no-padding">About Us</h4>
+                            </div>
+                            <div class="info-sec">
+                                <p>Jangan lupa mendaftarkan diri anda hanya disini tentunya</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <div class="ftr-tle">
+                                <h4 class="white no-padding">Contact Info</h4>
+                            </div>
+                            <div class="info-sec">
+                                <p>Nomor Telpon : (+01)56565353</p>
+                            </div>
+                            <div class="info-sec">
+                                <p>Email : mbah@mbahgoogle.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-line">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                © Copyright Magnus . All Rights Reserved
+                                <div class="credits">
+                                    <!--
+                                      All the links in the footer should remain intact.
+                                      You can delete the links only if you purchased the pro version.
+                                      Licensing information: https://bootstrapmade.com/license/
+                                      Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Medilab
+                                    -->
+                                    Designed by <a href="https://bootstrapmade.com/">BootstrapMade.com</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </footer>
+        <script>
+            function make_json(form) {
+                var json = {
+                    "lat": form.lat.value,
+                    "lng": form.lng.value,
+                    "name": form.nama.value,
+                };
+                var html = JSON.stringify(json, 0, 100);
+                var Url = "http://202.94.83.190:8080/165314104_WebServiceProjectRS/webresources/location/addLocation";
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', Url, false)
+                xhr.setRequestHeader("Content-type", "application/json");
+                xhr.send(html);
+
+                alert(html);
+                document.getElementById("output").innerHTML = html;
+                return false;
+            }
+        </script>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/jquery.easing.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/custom.js"></script>
+        <script src="contactform/contactform.js"></script>
+
+    </body>
+
+</html>
