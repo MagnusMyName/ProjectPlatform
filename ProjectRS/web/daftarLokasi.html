@@ -16,14 +16,20 @@
           Author: BootstrapMade.com
           Author URL: https://bootstrapmade.com
         ======================================================= -->
-        <style>
-            .table-wrapper-scroll-y {
-                display: block;
-                max-height: 450px;                
-                overflow-y: auto;
-                -ms-overflow-style: -ms-autohiding-scrollbar;
-                width: 100%;
-                height: 100%;
+      <style>
+            /* Always set the map height explicitly to define the size of the div
+             * element that contains the map. */
+            #map {
+                /*height: 100%;*/
+                height: 95%;
+            }
+            /* Optional: Makes the sample page fill the window. */
+            html, body {
+                /*height: 100%;*/
+                /*height: 50%;*/
+                /*width: 50%;*/
+                margin: 0;
+                padding: 0;
             }
         </style>
     </head>
@@ -32,10 +38,9 @@
         <!--banner-->
         <section id="banner" class="banner">
             <div class="bg-color">
-                <nav class="navbar navbar-default navbar-fixed-top">
+                   <nav class="navbar navbar-default navbar-fixed-top">
                     <div class="container">
                         <div class="col-md-12">
-
                             <div class="collapse navbar-collapse navbar-right" id="myNavbar">
                                 <ul class="nav navbar-nav">
                                     <li class=""><a href="index.html">Home</a></li>
@@ -51,15 +56,12 @@
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Klinik</a>
                                         <ul class="dropdown-menu">
                                             <li><a href="daftarKlinik.html">Daftar Klinik</a></li>
-                                            <li><a href="tambahKlinik.html">Pendaftaran Klinik Baru</a></li>
-                                            <li><a href="tambahLokasiKlinik.html">Pendaftaran Lokasi Klinik yang baru</a></li>
                                         </ul>          
                                     </li>
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dokter</a>
                                         <ul class="dropdown-menu">
                                             <li><a href="daftarDokter.html">Daftar Dokter</a></li>
-                                            <li><a href="tambahDokter.html">Pendaftaran Dokter Baru</a></li>    
                                         </ul>          
                                     </li>
                                     <li class=""><a href="daftarLokasi.html">Lokasi Kami</a></li>
@@ -87,7 +89,34 @@
         <div></div>
         <section id="daftar" class="">                  
             <h1><u>Lokasi Kami</u></h1><br>  
-            <p id="map"></p>
+           
+                <script>
+                    var map;
+                    var url = "http://202.94.83.190:8080/165314104_WebServiceProjectRS/webresources/location";
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function () {
+                        if (this.readyState == 4 && this.status == 200) {
+                            document.getElementById("map").innerHTML = this.responseText;
+
+                            var obj = JSON.parse(this.responseText);
+                            map = new google.maps.Map(document.getElementById('map'), {
+                                center: {lat: obj[0].lat, lng: obj[0].lng},
+                                zoom: 6.5
+                            });
+                            var marker = [];
+                            for (var i = 0; i < obj.length; i++) {
+                                marker[i] = new google.maps.Marker({position: {lat: obj[i].lat, lng: obj[i].lng}, map: map});
+                            }
+                        }
+                    };
+                    xhttp.open("GET", url, true);
+                    xhttp.send();
+//                    }
+                </script>
+                <!--                <p id="demo"></p>-->
+                <p id="map"></p>
+                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnD2l64I6G6fUkPpc3D79Jcau30v8xEKE&callback=initMap"
+                async defer></script>
         </section>
         <footer id="footer">
             <div class="top-footer">
@@ -133,30 +162,7 @@
                     </div>
                 </div>
         </footer>
-        <script>
-            var map;
-            var url = "http://202.94.83.190:8080/165314104_WebServiceProjectRS/webresources/location";
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    document.getElementById("map").innerHTML = this.responseText;
-
-                    var obj = JSON.parse(this.responseText);
-                    map = new google.maps.Map(document.getElementById('map'), {
-                        center: {lat: obj[0].lat, lng: obj[0].lng},
-                        zoom: 6.5
-                    });
-                    var marker = [];
-                    for (var i = 0; i < obj.length; i++) {
-                        marker[i] = new google.maps.Marker({position: {lat: obj[i].lat, lng: obj[i].lng}, map: map});
-                    }
-                }
-            };
-            xhttp.open("GET", url, true);
-            xhttp.send();
-        </script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnD2l64I6G6fUkPpc3D79Jcau30v8xEKE&callback=initMap"
-        async defer></script>
+       
         <script src="js/jquery.min.js"></script>
         <script src="js/jquery.easing.min.js"></script>
         <script src="js/bootstrap.min.js"></script>

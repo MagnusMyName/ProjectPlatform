@@ -45,13 +45,13 @@ public class PasienResources {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getJson() {
         //TODO return proper representation object
-        PasienHelper pasn = new PasienHelper();
-        List<Pasien> list = pasn.getAllPasien();
+        PasienHelper pasien = new PasienHelper();
+        List<Pasien> list = pasien.getAllPasien();
         Gson gson = new Gson();
         String json = gson.toJson(list);
         System.out.println(json);
-        return Response.status(200)//penting utama
-                .entity(json)//penting utama
+        return Response.status(Response.Status.OK)//penting utama
+                .entity(json)//utama
                 .header("Access-Control-Allow-Origin", "*")
                 .header("Access-Control-Allow-Methods",
                         "GET,POST,HEAD,OPTIONS,PUT")
@@ -67,7 +67,7 @@ public class PasienResources {
     }
 
     /**
-     * PUT method for updating or creating an instance of PasienResources
+     * PUT method for updating or creating an instance of PasienResource
      *
      * @param content representation for the resource
      */
