@@ -43,7 +43,7 @@
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Layanan Pasien</a>
                                         <ul class="dropdown-menu">
                                             <li><a href="tambahPasien.html">Pendaftaran Pasien Baru</a></li>
-                                            <li><a href="tambahPasienBerobat.html">Pendaftaran Pasien Berobat</a><li>    
+                                            <li><a href="cariPasien.html">Pendaftaran Pasien Berobat</a><li>    
                                             <li><a href="daftarAntrian.html">Daftar Antrian</a></li>
                                         </ul>      
                                     </li>
@@ -86,8 +86,40 @@
         </section>
         <div></div>
         <section id="daftar" class="">                  
-            <h1><u>Berikut Daftar Dokter yang Tersedia</u></h1><br>
-            <p id="demo"></p>
+           <form onsubmit="return make_json(this);" style="border:1px solid #ccc" method="POST">
+            <div class="form-group">
+                <p>
+                    <strong>Pencarian data pasien</strong>
+                    <br>
+                </p>
+
+                <div class="contact-form">
+                    <table>
+                        <tr><td>No Rekam Medis</td> <td>:</td> <td><input type="text" id="nrm"/> <button type="button" onclick="loadDoc()" id="btn">Cari</button></td></tr>
+
+                    </table>
+                    <br/><h2><strong>Hasil Pencarian</strong></h2>
+                    <table width="400px">
+                        <tr><td>Nama</td> <td>:</td><td><input type="text" id="nama" value=""/></td>
+                        <tr><td>NIK</td> <td>:</td><td><input type="text" id="nik" value=""/></td></tr>
+                        <tr><td>Alamat</td> <td>:</td><td><input type="text" id="alamat" value=""/></td></tr>
+                        <tr><td>Tanggal Rawat Jalan</td> <td>:</td><td><input type="Date" id="tanggal" value=""/></td></tr>
+                        <tr><td>Nama Klinik</td> <td>:</td><td>
+                                <select name="klinik" id=namaKlinik>
+                                    <option style="color: black" label="--pilih klinik--"></option>
+                                    <option style="color: black" label="anak">anak</option>
+                                    <option style="color: black" label="mata">mata</option>
+                                    <option style="color: black" label="gigi">gigi</option>
+                                </select>
+                            </td></tr>
+                    </table>
+
+                    <input type="submit" value="Tambah"/>
+                    <pre id="berhasil">
+                    </pre>
+                </div>
+            </div>
+        </form>
         </section>
         <footer id="footer">
             <div class="top-footer">
@@ -134,29 +166,41 @@
                 </div>
         </footer>
         <script>
-//                    function tabelDokter() {
-            var url = "http://202.94.83.190:8080/165314104_WebServiceProjectRS/webresources/dokter";
-            var xmlhttp = new XMLHttpRequest();
-            xmlhttp.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    loopingList(this.responseText);
-                }
-            }
-            xmlhttp.open("GET", url, true);
-            xmlhttp.send();
+function loadDoc() {
 
-            function loopingList(response) {
-                var size = JSON.parse(response);
-                var i;
-                var out = "<table border='1' class='table-wrapper-scroll-y'><thead><tr><th>ID Dokter</th><th>Nama Dokter</th><th>Spesialisasi Dokter</th></tr></thead>";
-                for (i = 0; i < size.length; i++) {
-                    out += "<tbody><tr><td>" + size[i].id +
-                            "</td><td>" + size[i].nama +
-                            "</td><td>" + size[i].spesialis +
-                            "</td></tr></tbody>";
-                }
-                out += "</table>";
-                document.getElementById("demo").innerHTML = out;
+                var url = "http://202.94.83.190:8080/165314016_maps/webresources/Pasien/cariPasien?noRm=" + nrm.value;
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("GET", url, true);
+                xhttp.send();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var objj = JSON.parse(this.responseText);
+                        document.getElementById("nama").value = objj.nama;
+                        document.getElementById("nik").value = objj.nik;
+                        document.getElementById("alamat").value = objj.alamat;
+                    }
+                };
+            }
+
+
+            function make_json(form) {
+                var json = {
+                    "tanggal": form.tanggal.value,
+                    "noRm": form.nik.value,
+                    "nama": form.nama.value,
+                    "alamat": form.alamat.value,
+                    "namaKlinik": form.namaKlinik.value
+                };
+                var html = JSON.stringify(json, 0, 100);
+
+                var Url = "http://202.94.83.190:8080/165314104_WebServiceProjectRS/webresources/antrean/addAntrian";
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', Url, false);
+                xhr.setRequestHeader("Content-type", "application/json");
+                xhr.send(html);
+
+                document.getElementById("berhasil").innerHTML = "Pendaftaran Berhasil";
+                return false;
             }
         </script>
         <script src="js/jquery.min.js"></script>

@@ -32,7 +32,7 @@
         <!--banner-->
         <section id="banner" class="banner">
             <div class="bg-color">
-                  <nav class="navbar navbar-default navbar-fixed-top">
+                <nav class="navbar navbar-default navbar-fixed-top">
                     <div class="container">
                         <div class="col-md-12">
                             <div class="collapse navbar-collapse navbar-right" id="myNavbar">
@@ -81,42 +81,38 @@
             </div>
         </section>
         <div></div>
-         <section id="login" class="section section-padded bg-info">
+        <section id="login" class="section section-padded bg-info">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6 col-md-4 col-md-offset-4">
                         <h3 class="text-center login-title">Login</h3>
 
                         <div class="account-wall">
-                            <form class="form-signin" onsubmit="loadDoc()">
-                                <input type="text" id="emaill" class="form-control" placeholder="Username" required autofocus>
-                                <br>
-                                <input type="password" id="password" class="form-control" placeholder="Password" required>
-                                <br>
-                                <button class="btn btn-blue-fill btn-block" type="submit" onclick="loadDoc()" >
-                                    Login</button>
-                                <span class="clearfix"></span>
-                            </form>
+                            <h2>Silahkan Login</h2>
+                            <input id="b" name = "b" placeholder="Username">
+                            <input id="a" type="password" name="a" placeholder="Password">
+                            <button type="button" onclick="loadDoc()">login</button>
                         </div>                       
                     </div>
                 </div>
             </div>   
         </section> 
         <script>
-            function loadDoc() {        
-                alert("Terima kasih anda sudah login...")
-                var email = emaill.value;
-                var pw = password.value;
+            function loadDoc() {
+              var email = b.value;
+                var pw = a.value;
                 var url = 'http://202.94.83.190:8080/165314104_WebServiceProjectRS/webresources/user/login?email=' + email + '&password=' + pw;
+                //  var url = 'http://localhost:8084/165314035_rskuServices/webresources/user/login?email=' + email.value + '&password=' + pw ;
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function () {
                     if (this.readyState == 4 && this.status == 200) {
                         var user = JSON.parse(this.responseText);
-                        if (user !== null) {
+                        if(user !== null){
                             window.open("adminRs.html", "_self");
-                        } else {
-                            alert("Login Gagal!");
+                        }else{
+                            alert("Login Gagal");
                         }
+                      
                         document.getElementById("demo").innerHTML =
                                 this.responseText;
                     }
@@ -126,7 +122,7 @@
             }
 
         </script>
-      
+
         <footer id="footer">
             <div class="top-footer">
                 <div class="container">
@@ -171,7 +167,7 @@
                     </div>
                 </div>
         </footer>
-       
+
         <script src="js/jquery.min.js"></script>
         <script src="js/jquery.easing.min.js"></script>
         <script src="js/bootstrap.min.js"></script>

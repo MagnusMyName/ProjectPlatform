@@ -16,23 +16,29 @@
           Author: BootstrapMade.com
           Author URL: https://bootstrapmade.com
         ======================================================= -->
+
         <style>
-            .table-wrapper-scroll-y {
-                display: block;
-                max-height: 450px;                
-                overflow-y: auto;
-                -ms-overflow-style: -ms-autohiding-scrollbar;
-                width: 100%;
-                height: 100%;
+         
+            table, th , td  {
+                position: relative;
+                border-collapse: collapse;
+                padding: 10px;                               
+            }
+            table tr:nth-child(odd) {
+                background-color: #f1f1f1;
+            }
+            table tr:nth-child(even) {
+                background-color: #ffffff;
             }
         </style>
+
     </head>
 
     <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
         <!--banner-->
         <section id="banner" class="banner">
             <div class="bg-color">
-                   <nav class="navbar navbar-default navbar-fixed-top">
+                <nav class="navbar navbar-default navbar-fixed-top">
                     <div class="container">
                         <div class="col-md-12">
                             <div class="collapse navbar-collapse navbar-right" id="myNavbar">
@@ -82,7 +88,7 @@
         </section>
         <div></div>
         <section id="daftar" class="">                  
-         <h1><u>Daftar Antrian Pasien</u></h1><br>  
+            <h1><u>Daftar Antrian Pasien</u></h1><br>  
             <p id="demo"></p>
         </section>
         <footer id="footer">
@@ -131,28 +137,31 @@
         </footer>
         <script>
             var url = "http://202.94.83.190:8080/165314104_WebServiceProjectRS/webresources/antrean";
-            var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
-                    loopingList(this.responseText);
+                    myFunction(this.responseText);
                 }
             }
             xmlhttp.open("GET", url, true);
             xmlhttp.send();
-
-            function loopingList(response) {
-                var size = JSON.parse(response);
+            function myFunction(response) {
+                var arr = JSON.parse(response);
                 var i;
-                var out = "<table align='center' style='width: 78%;' border='1' class='table-wrapper-scroll-y'><thead><tr><th>ID</th><th>No. Rekam Medis</th><th>Nama Pasien</th><th>Alamat Klinik</th><th>Nama Klinik</th><th>Tanggal Periksa</th></tr></thead>";
-
-                for (i = 0; i < size.length; i++) {
-                    out += "<tbody><tr><td>" + size[i].id +
-                            "</td><td>" + size[i].noRm +
-                            "</td><td>" + size[i].nama +
-                            "</td><td>" + size[i].alamat +
-                            "</td><td>" + size[i].namaKlinik +
-                            "</td><td>" + size[i].tanggal +
-                            "</td></tr></tbody>";
+                var out = "<center><table align='center' style='width: 60%;' border='1'> <tr><td>ID</td><td>tanggal</td>\n\
+                                                   <td>noRm</td><td>nama</td><td>alamat</td><td>namaKlinik</td></tr></center>";
+                for (i = 0; i < arr.length; i++) {
+                    out += "<tr><td>" +
+                            arr[i].id +
+                            "</td><td>" +
+                            arr[i].tanggal +
+                            "</td><td>" +
+                            arr[i].noRm +
+                            "</td><td>" +
+                            arr[i].nama +
+                            "</td><td>" +
+                            arr[i].alamat +
+                            "</td><td>" +
+                            arr[i].namaKlinik;
                 }
                 out += "</table>";
                 document.getElementById("demo").innerHTML = out;

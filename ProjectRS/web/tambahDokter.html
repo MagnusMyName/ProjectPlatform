@@ -23,7 +23,7 @@
         <!--banner-->
         <section id="banner" class="banner">
             <div class="bg-color">
-                  <nav class="navbar navbar-default navbar-fixed-top">
+                <nav class="navbar navbar-default navbar-fixed-top">
                     <div class="container">
                         <div class="col-md-12">
                             <div class="collapse navbar-collapse navbar-right" id="myNavbar">
@@ -33,7 +33,7 @@
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Layanan Pasien</a>
                                         <ul class="dropdown-menu">
                                             <li><a href="tambahPasien.html">Pendaftaran Pasien Baru</a></li>
-                                            <li><a href="tambahPasienBerobat.html">Pendaftaran Pasien Berobat</a><li>    
+                                            <li><a href="cariPasien.html">Pendaftaran Pasien Berobat</a><li>    
                                             <li><a href="daftarAntrian.html">Daftar Antrian</a></li>
                                         </ul>      
                                     </li>
@@ -90,7 +90,7 @@
                     </div><br>
                     <div class ="form-group">
                         <label for="spesial">Spesialisasi</label><br>
-                        <input type="text" placeholder="Masukkan Spesialisasi Dokter Baru" id="spesial" required/>
+                        <input type="text" placeholder="Masukkan Spesialisasi Dokter Baru" id="spesialis" required/>
                     </div><br><br>
 
                     <div class="clearfix">
@@ -151,17 +151,16 @@
             function make_json(form) {
                 var json = {
                     "nama": form.nama.value,
-                    "spesial": form.spesial.value,
+                    "spesialis": form.spesialis.value
                 };
                 var html = JSON.stringify(json, 0, 100);
                 var Url = "http://202.94.83.190:8080/165314104_WebServiceProjectRS/webresources/dokter/addDoctor";
                 var xhr = new XMLHttpRequest();
-                xhr.open('POST', Url, false)
+                xhr.open('POST', Url, false);
                 xhr.setRequestHeader("Content-type", "application/json");
                 xhr.send(html);
 
-                alert(html);
-                document.getElementById("output").innerHTML = html;
+                document.getElementById("output").innerHTML = "Pendaftaran Berhasil";
                 return false;
             }
         </script>
