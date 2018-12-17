@@ -16,7 +16,7 @@
           Author: BootstrapMade.com
           Author URL: https://bootstrapmade.com
         ======================================================= -->
-      <style>
+        <style>
             /* Always set the map height explicitly to define the size of the div
              * element that contains the map. */
             #map {
@@ -38,7 +38,7 @@
         <!--banner-->
         <section id="banner" class="banner">
             <div class="bg-color">
-                   <nav class="navbar navbar-default navbar-fixed-top">
+                <nav class="navbar navbar-default navbar-fixed-top">
                     <div class="container">
                         <div class="col-md-12">
                             <div class="collapse navbar-collapse navbar-right" id="myNavbar">
@@ -48,7 +48,8 @@
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Layanan Pasien</a>
                                         <ul class="dropdown-menu">
                                             <li><a href="tambahPasien.html">Pendaftaran Pasien Baru</a></li>
-                                            <li><a href="tambahPasienBerobat.html">Pendaftaran Pasien Berobat</a><li>    
+                                            <li><a href="cariPasien.html">Pendaftaran Pasien Berobat</a><li>  
+
                                             <li><a href="daftarAntrian.html">Daftar Antrian</a></li>
                                         </ul>      
                                     </li>
@@ -89,34 +90,34 @@
         <div></div>
         <section id="daftar" class="">                  
             <h1><u>Lokasi Kami</u></h1><br>  
-           
-                <script>
-                    var map;
-                    var url = "http://202.94.83.190:8080/165314104_WebServiceProjectRS/webresources/location";
-                    var xhttp = new XMLHttpRequest();
-                    xhttp.onreadystatechange = function () {
-                        if (this.readyState == 4 && this.status == 200) {
-                            document.getElementById("map").innerHTML = this.responseText;
 
-                            var obj = JSON.parse(this.responseText);
-                            map = new google.maps.Map(document.getElementById('map'), {
-                                center: {lat: obj[0].lat, lng: obj[0].lng},
-                                zoom: 6.5
-                            });
-                            var marker = [];
-                            for (var i = 0; i < obj.length; i++) {
-                                marker[i] = new google.maps.Marker({position: {lat: obj[i].lat, lng: obj[i].lng}, map: map});
-                            }
+            <script>
+                var map;
+                var url = "http://202.94.83.190:8080/165314104_WebServiceProjectRS/webresources/location";
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("map").innerHTML = this.responseText;
+
+                        var obj = JSON.parse(this.responseText);
+                        map = new google.maps.Map(document.getElementById('map'), {
+                            center: {lat: obj[0].lat, lng: obj[0].lng},
+                            zoom: 6.5
+                        });
+                        var marker = [];
+                        for (var i = 0; i < obj.length; i++) {
+                            marker[i] = new google.maps.Marker({position: {lat: obj[i].lat, lng: obj[i].lng}, map: map});
                         }
-                    };
-                    xhttp.open("GET", url, true);
-                    xhttp.send();
+                    }
+                };
+                xhttp.open("GET", url, true);
+                xhttp.send();
 //                    }
-                </script>
-                <!--                <p id="demo"></p>-->
-                <p id="map"></p>
-                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnD2l64I6G6fUkPpc3D79Jcau30v8xEKE&callback=initMap"
-                async defer></script>
+            </script>
+            <!--                <p id="demo"></p>-->
+            <p id="map"></p>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnD2l64I6G6fUkPpc3D79Jcau30v8xEKE&callback=initMap"
+            async defer></script>
         </section>
         <footer id="footer">
             <div class="top-footer">
@@ -162,7 +163,7 @@
                     </div>
                 </div>
         </footer>
-       
+
         <script src="js/jquery.min.js"></script>
         <script src="js/jquery.easing.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
